@@ -34,7 +34,7 @@ const Config = ConfigModule.forRoot({
 
             // --- Utils
             LoggerModule,
-            RedisModule,
+            // RedisModule,
       ],
       providers: [],
       controllers: [],
