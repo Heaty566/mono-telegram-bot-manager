@@ -29,39 +29,58 @@ export class BotController {
 
       @Post('')
       handleBotListener(@Req() request: Request, @Body() body: WebhookResponse, @Res() response: Response) {
-            console.log(request);
             console.log(request.hostname);
-            console.log(body);
-            const helpMessage =
-                  'BOT commands: \n' +
-                  this.command.map((item) => `${item.command} : ${item.description} `).join('\n') +
-                  '\nPlease type to send a command ';
+            try {
+                  const helpMessage =
+                        'BOT commands: \n' +
+                        this.command.map((item) => `${item.command} : ${item.description} `).join('\n') +
+                        '\nPlease type to send a command ';
 
-            const command = body.message.text.toLowerCase();
-            switch (command) {
-                  case 'hello':
-                        this.botService.sendMessage({ chatId: String(body.message.chat.id), level: 'INFO', message: this.command[0].description });
-                        break;
-                  case 'summary':
-                        this.botService.sendMessage({ chatId: String(body.message.chat.id), level: 'INFO', message: this.command[1].description });
-                        break;
-                  case 'ok':
-                        this.botService.sendMessage({ chatId: String(body.message.chat.id), level: 'INFO', message: this.command[2].description });
-                        break;
-                  case 'no':
-                        this.botService.sendMessage({ chatId: String(body.message.chat.id), level: 'INFO', message: this.command[3].description });
-                        break;
-                  case 'help':
-                        this.botService.sendMessage({ chatId: String(body.message.chat.id), level: 'INFO', message: helpMessage });
-                        break;
-                  default:
-                        this.botService.sendMessage({
-                              chatId: String(body.message.chat.id),
-                              level: 'INFO',
-                              message: `Invalid command type: 'help' to print all available command`,
-                        });
-                        break;
+                  const command = body.message.text.toLowerCase();
+                  switch (command) {
+                        case 'hello':
+                              this.botService.sendMessage({
+                                    chatId: String(body.message.chat.id),
+                                    level: 'INFO',
+                                    message: this.command[0].description,
+                              });
+                              break;
+                        case 'summary':
+                              this.botService.sendMessage({
+                                    chatId: String(body.message.chat.id),
+                                    level: 'INFO',
+                                    message: this.command[1].description,
+                              });
+                              break;
+                        case 'ok':
+                              this.botService.sendMessage({
+                                    chatId: String(body.message.chat.id),
+                                    level: 'INFO',
+                                    message: this.command[2].description,
+                              });
+                              break;
+                        case 'no':
+                              this.botService.sendMessage({
+                                    chatId: String(body.message.chat.id),
+                                    level: 'INFO',
+                                    message: this.command[3].description,
+                              });
+                              break;
+                        case 'help':
+                              this.botService.sendMessage({ chatId: String(body.message.chat.id), level: 'INFO', message: helpMessage });
+                              break;
+                        default:
+                              this.botService.sendMessage({
+                                    chatId: String(body.message.chat.id),
+                                    level: 'INFO',
+                                    message: `Invalid command type: 'help' to print all available command`,
+                              });
+                              break;
+                  }
+            } catch (error) {
+                  console.log(error);
+            } finally {
+                  response.send('ok');
             }
-            response.send('ok');
       }
 }
