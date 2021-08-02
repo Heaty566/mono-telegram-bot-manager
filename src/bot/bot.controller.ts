@@ -28,7 +28,10 @@ export class BotController {
       ];
 
       @Post('')
-      handleBotListener(@Body() body: WebhookResponse, @Res() response: Response) {
+      handleBotListener(@Req() request: Request, @Body() body: WebhookResponse, @Res() response: Response) {
+            console.log(request);
+            console.log(request.hostname);
+            console.log(body);
             const helpMessage =
                   'BOT commands: \n' +
                   this.command.map((item) => `${item.command} : ${item.description} `).join('\n') +
