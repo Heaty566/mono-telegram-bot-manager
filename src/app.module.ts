@@ -5,13 +5,13 @@ import { ScheduleModule } from '@nestjs/schedule';
 //--------- Service
 
 //---------Module
-import { BotModule } from './bot/bot.module';
 
 //---------Provider
 
 //---------Utils
 import { LoggerModule } from './utils/logger/logger.module';
 import { RedisModule } from './utils/redis/redis.module';
+import { PaymentModule } from './payment/payment.module';
 
 //---------Entity
 
@@ -28,13 +28,13 @@ const Config = ConfigModule.forRoot({
             ScheduleModule.forRoot(),
 
             // --- Module
-            BotModule,
 
             // --- Provider
 
             // --- Utils
             LoggerModule,
             RedisModule,
+            PaymentModule,
       ],
       providers: [],
       controllers: [],

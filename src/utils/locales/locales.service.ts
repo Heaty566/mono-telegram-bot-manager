@@ -28,7 +28,9 @@ export class LocalesService {
 
             if (res.details)
                   for (const item in res.details) {
-                        formatApi.details[item] = this.translate(res.details[item].type, { ...res.details[item].context });
+                        formatApi.details[item] = this.translate(res.details[item].type, {
+                              ...res.details[item].context,
+                        });
                   }
 
             return formatApi;

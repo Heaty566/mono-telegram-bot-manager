@@ -32,7 +32,12 @@ const formatLogger = printf((log) => {
                                           format: combine(timestamp(), prettyPrint()),
                                     }),
                                     new transports.Console({
-                                          format: combine(timestamp(), colorize(), label({ label: '[SERVER]' }), formatLogger),
+                                          format: combine(
+                                                timestamp(),
+                                                colorize(),
+                                                label({ label: '[SERVER]' }),
+                                                formatLogger,
+                                          ),
                                     }),
                               ],
                         });

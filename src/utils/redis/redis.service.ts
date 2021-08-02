@@ -7,7 +7,10 @@ import { LoggerService } from '../logger/logger.service';
 
 @Injectable()
 export class RedisService {
-      constructor(@Inject('RedisClient') private readonly redisRepository: RedisClient, private readonly logger: LoggerService) {}
+      constructor(
+            @Inject('RedisClient') private readonly redisRepository: RedisClient,
+            private readonly logger: LoggerService,
+      ) {}
 
       /**
        *
