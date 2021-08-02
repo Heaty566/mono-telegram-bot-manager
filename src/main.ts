@@ -17,9 +17,9 @@ async function bootstrap() {
       await app.listen(port, () => {
             logger.log(`Listening on port ${port}`);
             logger.log(`Current NODE_ENV: ${process.env.NODE_ENV}`);
-            logger.log(`Current debug status: ${process.env.DOC}`);
+            logger.log(`Current Webhook URL: ${process.env.SERVER_URL}/bot`);
             logger.log(`Cors allows access: ${process.env.CLIENT_URL}`);
-            logger.log(`Database Information: ${process.env.DB_HOST} - ${process.env.DB_NAME}`);
+            logger.log(`Current ChatId: ${process.env.CHAT_ID}`);
             logger.log('Ready for service');
       });
 }

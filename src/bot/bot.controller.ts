@@ -9,7 +9,7 @@ export class BotController {
 
       @Post('')
       handleBotListener(@Req() request: Request, @Res() response: Response) {
-            console.log('hello');
+            console.log(request.body);
             this.botService.sendMessage({ chatId: process.env.CHAT_ID, level: 'INFO', message: 'hello' });
             response.send('ok');
       }
