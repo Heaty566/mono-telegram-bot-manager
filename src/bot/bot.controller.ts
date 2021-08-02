@@ -34,8 +34,6 @@ export class BotController {
                   this.command.map((item) => `${item.command} : ${item.description} `).join('\n') +
                   '\nPlease type to send a command ';
 
-            console.log(helpMessage);
-
             const command = body.message.text.toLowerCase();
             switch (command) {
                   case 'hello':
