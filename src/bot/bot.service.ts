@@ -9,15 +9,21 @@ export class BotService implements OnApplicationBootstrap {
       constructor(private readonly jwtService: JwtService) {}
 
       async onApplicationBootstrap() {
-            //init webhook
-            // const url = `${config.telegramUrl}${process.env.TELEGRAM_BOT_TOKEN}/setWebhook?url=${process.env.SERVER_URL}/bot`;
-            // axios.get(url).then(() => {
-            this.sendMessage({
-                  chatId: process.env.CHAT_ID,
-                  message: 'Initialize Successfully \n' + `Server Url: ${process.env.SERVER_URL}/bot`,
-                  level: 'INFO',
-            });
-            // });
+            // init webhook
+            if (process.env.IS_INIT_CONNECT !== 'DISABLE') {
+                  const url = `${config.telegramUrl}${process.env.TELEGRAM_BOT_TOKEN}/setWebhook?url=${process.env.SERVER_URL}/bot`;
+                  axios.get(url)
+                        .then(() => {
+                              this.sendMessage({
+                                    chatId: process.env.CHAT_ID,
+                                    message: 'Initialize Successfully \n' + `Server Url: ${process.env.SERVER_URL}/bot`,
+                                    level: 'INFO',
+                              });
+                        })
+                        .catch((error) => {
+                              console.log(error);
+                        });
+            }
       }
 
       async sendMessage({ chatId, message, level }: SendMessage) {
