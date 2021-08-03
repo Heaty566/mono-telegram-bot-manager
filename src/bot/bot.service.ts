@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { OnApplicationBootstrap } from '@nestjs/common';
 import { config } from '../config';
 import axios from 'axios';
+import { SendMessage } from './dto/sendMessage';
 
 @Injectable()
 export class BotService implements OnApplicationBootstrap {
@@ -60,13 +61,14 @@ export class BotService implements OnApplicationBootstrap {
       };
 
       getDescription(str: string) {
+            Object.keys(this.command).forEach((item) => console.log(item));
             const helpCommand =
                   'BOT commands: \n' +
                   '-------------------\n' +
                   Object.keys(this.command)
                         .map((item) => `'${item}' : ${this.command[item]} `)
                         .join('\n') +
-                  '-------------------\n' +
+                  '\n-------------------' +
                   '\nPlease type to send a command ';
 
             Object.keys(this.command).map((item) => {
