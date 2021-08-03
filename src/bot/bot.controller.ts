@@ -10,13 +10,13 @@ export class BotController {
       constructor(private readonly botService: BotService) {}
 
       @Post('')
-      handleBotListener(@Req() request: Request, @Body() body: WebhookResponse, @Res() response: Response) {
+      async handleBotListener(@Req() request: Request, @Body() body: WebhookResponse, @Res() response: Response) {
             console.log(request.hostname);
             try {
-                  this.botService.sendMessage({
-                        chatId: String(body.message.text.toLowerCase()),
+                  await this.botService.sendMessage({
+                        chatId: String(body.message.chat.id),
                         level: 'INFO',
-                        message: this.botService.getDescription(String(body.message.chat.id)),
+                        message: this.botService.getDescription(body.message.text.toLowerCase()),
                   });
             } catch (error) {
                   console.log(error);
