@@ -61,7 +61,6 @@ export class BotService implements OnApplicationBootstrap {
       };
 
       getDescription(str: string) {
-            Object.keys(this.command).forEach((item) => console.log(item));
             const helpCommand =
                   'BOT commands: \n' +
                   '-------------------\n' +
@@ -71,11 +70,11 @@ export class BotService implements OnApplicationBootstrap {
                   '\n-------------------' +
                   '\nPlease type to send a command ';
 
-            Object.keys(this.command).map((item) => {
-                  if (item === str) {
-                        return this.command[item];
+            for (const key in this.command) {
+                  if (key === str) {
+                        return this.command[key];
                   }
-            });
+            }
 
             if (str === 'help') {
                   return helpCommand;
