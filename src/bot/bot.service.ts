@@ -52,4 +52,33 @@ export class BotService implements OnApplicationBootstrap {
                   return null;
             }
       }
+      private command = {
+            hello: 'Test Connection',
+            summary: 'Test command summary',
+            ok: 'Test command ok',
+            no: 'Test command no',
+      };
+
+      getDescription(str: string) {
+            const helpCommand =
+                  'BOT commands: \n' +
+                  '-------------------\n' +
+                  Object.keys(this.command)
+                        .map((item) => `'${item}' : ${this.command[item]} `)
+                        .join('\n') +
+                  '-------------------\n' +
+                  '\nPlease type to send a command ';
+
+            Object.keys(this.command).map((item) => {
+                  if (item === str) {
+                        return this.command[item];
+                  }
+            });
+
+            if (str === 'help') {
+                  return helpCommand;
+            }
+
+            return "Invalid command type 'help' to print all available command";
+      }
 }
