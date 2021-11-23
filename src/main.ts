@@ -19,7 +19,9 @@ async function bootstrap() {
             logger.log(`Current NODE_ENV: ${process.env.NODE_ENV}`);
             logger.log(`Current Webhook URL: ${process.env.SERVER_URL}/bot`);
             logger.log(`Cors allows access: ${process.env.CLIENT_URL}`);
+            console.log('hello');
             logger.log(`Current ChatId: ${process.env.CHAT_ID}`);
+
             logger.log('Ready for service');
       });
 }
